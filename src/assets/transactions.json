@@ -1,0 +1,14 @@
+[
+    {
+        "description": "first",
+        "amount": 10
+    },
+    {
+        "description": "second",
+        "amount": 55
+    },
+    {
+        "description": "third",
+        "amount": 101
+    }
+]
