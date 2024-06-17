@@ -9,7 +9,7 @@ import axios from "axios";
 function App() {
   const [isNewTransaction, toggleIsNewTransaction] = useState(0);
   const [balance, setBalance] = useState(1000);
-  const [used_balance, setUsedBalance] = useState(10);
+  const [used_balance, setUsedBalance] = useState(0);
   const [transactions, setTransactions] = useState([]);
 
   useEffect(() => {
@@ -18,6 +18,12 @@ function App() {
       .then((res) => setTransactions(res.data))
       .catch((err) => console.log(err));
   }, []);
+
+  useEffect(() => {
+    setUsedBalance(
+      transactions.reduce((acc, transaction) => acc + transaction.amount, 0)
+    );
+  });
 
   return (
     <div className="app">
@@ -35,7 +41,7 @@ function App() {
             current_balance={balance}
           />
           <div className="line"></div>
-          <TransactionList transactions={transactions} toggleTransaction={toggleIsNewTransaction} setTransactions={setTransactions}/>
+          <TransactionList transactions={transactions} toggleTransaction={toggleIsNewTransaction} setTransactions={setTransactions} />
         </>
       )}
     </div>
