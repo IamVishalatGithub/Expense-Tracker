@@ -13,13 +13,13 @@ function NewTransaction({
     e.preventDefault();
     setBalance((prevBalance) => prevBalance - parseFloat(amount));
     setUsedBalance((prevBalance) => prevBalance + parseFloat(amount));
-    const details = {
+    const newTransaction = {
       id: Date.now(),
       description: description,
       amount: parseFloat(amount),
     };
 
-    setTransactions((prevTransactions) => prevTransactions.concat(details));
+    setTransactions((prevTransactions) => prevTransactions.concat(newTransaction));
     setDescription("");
     setAmount();
     toggleTransaction(0);
