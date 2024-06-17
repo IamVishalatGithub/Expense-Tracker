@@ -7,20 +7,19 @@ function NewTransaction({
   setTransactions,
 }) {
   const [description, setDescription] = useState("");
-  const [amout, setAmount] = useState(0);
+  const [amount, setAmount] = useState(0);
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    setBalance((prevBalance) => prevBalance - amout);
-    setUsedBalance((prevBalance) => prevBalance + amout);
-    const details = [
-      {
-        description: description,
-        amount: amout,
-      },
-    ];
+    setBalance((prevBalance) => prevBalance - parseFloat(amount));
+    setUsedBalance((prevBalance) => prevBalance + parseFloat(amount));
+    const newTransaction = {
+      id: Date.now(),
+      description: description,
+      amount: parseFloat(amount),
+    };
 
-    setTransactions((prevTransactions) => prevTransactions.concat(details));
+    setTransactions((prevTransactions) => prevTransactions.concat(newTransaction));
     setDescription("");
     setAmount();
     toggleTransaction(0);

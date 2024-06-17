@@ -1,11 +1,11 @@
 import React, { useState } from "react";
 
-function TransactionList({ transactions, toggleTransaction, setTransactions}) {
-  
-  const deleterow = (rowkey) => {
+function TransactionList({ transactions, toggleTransaction, setTransactions }) {
+
+  const deleteTransaction = (id) => {
     let filtered = transactions.filter((row) => {
-        if(row.description === rowkey) return false;
-        else return true;
+      if (row.id === id) return false;
+      else return true;
     });
     setTransactions(filtered);
   };
@@ -37,16 +37,18 @@ function TransactionList({ transactions, toggleTransaction, setTransactions}) {
               <div className="overflow-hidden border border-gray-200 md:rounded-lg">
                 <table className="min-w-full divide-y divide-gray-200">
                   <thead className="divide-y divide-gray-200 bg-white">
-                    <td className="whitespace-nowrap px-4 py-4 text-lg text-black-800">
-                      Description
-                    </td>
-                    <td className="whitespace-nowrap px-4 py-4 text-lg text-black-800">
-                      Amount
-                    </td>
+                    <tr>
+                      <td className="whitespace-nowrap px-4 py-4 text-lg text-black-800">
+                        Description
+                      </td>
+                      <td className="whitespace-nowrap px-4 py-4 text-lg text-black-800">
+                        Amount
+                      </td>
+                    </tr>
                   </thead>
                   <tbody className="divide-y divide-gray-200 bg-white">
                     {transactions.map((transaction) => (
-                      <tr key={transaction.description}>
+                      <tr key={transaction.id}>
                         <td className="whitespace-nowrap px-4 py-4 text-sm text-gray-700">
                           {transaction.description}
                         </td>
@@ -56,7 +58,7 @@ function TransactionList({ transactions, toggleTransaction, setTransactions}) {
                         <td className="whitespace-nowrap px-4 py-4 text-sm text-gray-700">
                           <button
                             className="rounded-md bg-black px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-black/80 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-black"
-                            onClick={() => deleterow(transaction.description)}
+                            onClick={() => deleteTransaction(transaction.id)}
                           >
                             Delete
                           </button>
